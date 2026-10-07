@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: pokemon-nova
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: pokemon-nova-data
+      mountPath: /var/data
+      sizeGB: 1
