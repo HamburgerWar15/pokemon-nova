@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pokémon Nova</title>
+<style>
+:root{--bg:#090b14;--panel:#121625;--panel2:#191f34;--text:#eef2ff;--muted:#9aa4c0;--accent:#7c5cff;--accent2:#27d7b0;--danger:#ff5d73;--gold:#ffc857;--line:#2a3150}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top,#1d2040 0,#0a0d18 44%,#060810 100%);color:var(--text);min-height:100vh}button,input,select{font:inherit}.hidden{display:none!important}.shell{max-width:1260px;margin:auto;padding:20px}.glass{background:rgba(18,22,37,.88);border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 60px rgba(0,0,0,.28);backdrop-filter:blur(14px);border-radius:18px}.auth{min-height:100vh;display:grid;place-items:center;padding:20px}.authbox{width:min(460px,100%);padding:32px}.logo{font-size:42px;font-weight:1000;letter-spacing:-2px}.logo span{color:var(--accent2)}.subtitle{color:var(--muted);margin:4px 0 24px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.stack{display:grid;gap:12px}.field{width:100%;background:#0c1020;border:1px solid var(--line);border-radius:12px;color:white;padding:12px 14px;outline:none}.field:focus{border-color:var(--accent)}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;background:var(--panel2);color:white}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--accent),#9b6cff)}.btn.good{background:linear-gradient(135deg,#159b82,var(--accent2));color:#05120f}.btn.danger{background:var(--danger)}.btn.gold{background:var(--gold);color:#241b00}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}.stats{display:flex;gap:10px;flex-wrap:wrap}.pill{background:#101528;border:1px solid var(--line);padding:8px 11px;border-radius:999px;color:#dce3ff;font-weight:750}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.nav button.active{background:var(--accent)}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{padding:18px}.span4{grid-column:span 4}.span5{grid-column:span 5}.span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}.title{font-size:21px;font-weight:900;margin:0 0 10px}.muted{color:var(--muted)}.roulette{min-height:380px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}.roulette:after{content:"";position:absolute;inset:-50%;background:conic-gradient(from 180deg,transparent,var(--accent),transparent,var(--accent2),transparent);opacity:.13;animation:spinbg 8s linear infinite}@keyframes spinbg{to{transform:rotate(360deg)}}.roulette>*{position:relative;z-index:1}.bigmon{width:210px;height:210px;object-fit:contain;filter:drop-shadow(0 16px 28px rgba(0,0,0,.5))}.sparkle{animation:pulse 1s infinite alternate}@keyframes pulse{to{filter:drop-shadow(0 0 24px #ffe37c)}}.collection{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:12px}.mon{background:#0d1222;border:1px solid var(--line);border-radius:15px;padding:12px;position:relative}.mon img{width:100%;height:120px;object-fit:contain}.mon .name{font-weight:900}.mon .meta{font-size:12px;color:var(--muted)}.tag{display:inline-flex;border-radius:999px;padding:4px 8px;background:#202944;font-size:11px;font-weight:900;margin-top:5px}.tag.shiny{background:#5a4510;color:#ffe08a}.teamflag{position:absolute;top:8px;right:8px;background:var(--accent2);color:#052019;font-size:10px;font-weight:1000;padding:4px 7px;border-radius:999px}.progress{height:8px;border-radius:99px;background:#0a0d18;overflow:hidden;border:1px solid #252c47}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}.quest{padding:12px 0;border-bottom:1px solid var(--line)}.quest:last-child{border:0}.battlebox{display:grid;gap:10px}.result{padding:12px;border-radius:12px;background:#0b1020;border:1px solid var(--line);white-space:pre-line}.table{width:100%;border-collapse:collapse}.table td,.table th{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px}.table th{color:var(--muted);font-size:12px}.notice{position:fixed;right:18px;bottom:18px;background:#12182a;border:1px solid var(--line);border-radius:13px;padding:12px 16px;max-width:360px;z-index:99;box-shadow:0 12px 40px #0008}.section{display:none}.section.active{display:block}.mini{font-size:12px}.dangertext{color:#ff8a9b}.goodtext{color:#5be6c9}@media(max-width:850px){.span4,.span5,.span6,.span7,.span8{grid-column:span 12}.topbar{align-items:flex-start;flex-direction:column}.logo{font-size:34px}.shell{padding:12px}.authbox{padding:22px}}
+</style>
+</head>
+<body>
+<div id="auth" class="auth">
+  <div class="authbox glass">
+    <div class="logo">Pokémon <span>Nova</span></div>
+    <div class="subtitle">Roulette • adventure • battles • friends • trading</div>
+    <div class="stack">
+      <input id="username" class="field" placeholder="Username" autocomplete="username" />
+      <input id="password" class="field" placeholder="Password" type="password" autocomplete="current-password" />
+      <div class="row"><button class="btn primary" onclick="login()">Log in</button><button class="btn" onclick="register()">Create account</button></div>
+      <div id="authmsg" class="mini muted">New accounts get 1,000 coins and a free first spin.</div>
+    </div>
+  </div>
+</div>
+
+<div id="game" class="hidden">
+  <div class="shell">
+    <div class="topbar">
+      <div><div class="logo">Pokémon <span>Nova</span></div><div class="muted mini">Unofficial fan-made game</div></div>
+      <div class="stats"><span class="pill" id="who">Trainer</span><span class="pill">Lv <b id="lvl">1</b></span><span class="pill">🪙 <b id="coins">0</b></span><span class="pill">Pokédex <b id="count">0</b></span><span class="pill">✨ <b id="shinyCount">0</b></span><button class="btn" onclick="logout()">Log out</button></div>
+    </div>
+    <div class="nav">
+      <button class="btn active" data-tab="home" onclick="tab('home',this)">Home</button>
+      <button class="btn" data-tab="collection" onclick="tab('collection',this)">Collection</button>
+      <button class="btn" data-tab="battle" onclick="tab('battle',this)">Battle</button>
+      <button class="btn" data-tab="adventure" onclick="tab('adventure',this)">Adventure</button>
+      <button class="btn" data-tab="social" onclick="tab('social',this)">Friends & Trade</button>
+      <button class="btn" data-tab="leaders" onclick="tab('leaders',this)">Leaderboard</button>
+    </div>
+
+    <section id="home" class="section active">
+      <div class="grid">
+        <div class="span7 glass roulette card">
+          <div>
+            <img id="spinImg" class="bigmon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="roulette result" />
+            <h2 id="spinName">Ready to spin?</h2>
+            <div id="spinMeta" class="muted">Your first spin is free. After that, spins cost 100 coins.</div>
+            <div style="height:12px"></div>
+            <button id="spinBtn" class="btn primary" onclick="spin()">SPIN ROULETTE</button>
+          </div>
+        </div>
+        <div class="span5 glass card">
+          <h3 class="title">Daily Quests</h3><div id="quests"></div>
+        </div>
+        <div class="span6 glass card"><h3 class="title">Current Team</h3><div id="teamPreview" class="collection"></div></div>
+        <div class="span6 glass card"><h3 class="title">Career</h3><div id="career" class="stack muted"></div></div>
+      </div>
+    </section>
+
+    <section id="collection" class="section">
+      <div class="glass card"><div class="row" style="justify-content:space-between"><div><h3 class="title">Your Collection</h3><div class="muted mini">Click a card to add/remove it from your 6-Pokémon team. Train favorites with coins.</div></div><input id="collectionSearch" class="field" style="max-width:260px" placeholder="Search collection" oninput="renderCollection()" /></div><div style="height:14px"></div><div id="collectionGrid" class="collection"></div></div>
+    </section>
+
+    <section id="battle" class="section">
+      <div class="grid">
+        <div class="span6 glass card"><h3 class="title">Gym Challenge</h3><p class="muted">Nine regions. Eight badges each. Difficulty rises every badge.</p><select id="gymRegion" class="field"></select><div style="height:10px"></div><button class="btn primary" onclick="gym()">Challenge Gym</button></div>
+        <div class="span6 glass card"><h3 class="title">Elite Four</h3><p class="muted">Unlocks after you earn at least 8 total badges.</p><button class="btn gold" onclick="elite()">Enter Elite Four</button></div>
+        <div class="span6 glass card"><h3 class="title">Battle Tower</h3><p class="muted">Endless scaling floors. Your best floor is saved.</p><button class="btn good" onclick="tower()">Fight Next Floor</button></div>
+        <div class="span6 glass card"><h3 class="title">Legendary Raid</h3><p class="muted">Consumes one Raid Pass. Hard fight, chance to capture the boss.</p><button class="btn danger" onclick="raid()">Start Raid</button></div>
+        <div class="span12 glass card"><h3 class="title">Battle Log</h3><div id="battleResult" class="result muted">Build a strong team, then choose a challenge.</div></div>
+      </div>
+    </section>
+
+    <section id="adventure" class="section">
+      <div class="grid"><div class="span6 glass card"><h3 class="title">Expedition</h3><p class="muted">Explore a region for coins and a chance to catch a wild Pokémon. Expedition shiny odds are tougher than roulette.</p><select id="advRegion" class="field"></select><div style="height:10px"></div><button class="btn primary" onclick="expedition()">Start Expedition</button></div><div class="span6 glass card"><h3 class="title">Expedition Result</h3><div id="advResult" class="result muted">Choose a region and head out.</div></div></div>
+    </section>
+
+    <section id="social" class="section">
+      <div class="grid">
+        <div class="span6 glass card"><h3 class="title">Find Trainers</h3><div class="row"><input id="friendQ" class="field" style="flex:1" placeholder="Search username" /><button class="btn primary" onclick="searchFriends()">Search</button></div><div id="friendSearch" class="stack" style="margin-top:12px"></div></div>
+        <div class="span6 glass card"><h3 class="title">Friends & Requests</h3><div id="friends" class="stack"></div></div>
+        <div class="span12 glass card"><h3 class="title">Trades</h3><p class="muted mini">Create an offer from a collection card by using its ID in the form below. The receiving trainer can accept and choose their Pokémon.</p><div class="row"><input id="tradeUser" class="field" style="max-width:220px" placeholder="Friend username" /><input id="tradeMine" class="field" style="flex:1" placeholder="Your Pokémon instance ID" /><input id="tradeWant" class="field" style="flex:1" placeholder="Wanted Pokémon instance ID (optional)" /><button class="btn good" onclick="makeTrade()">Offer</button></div><div id="trades" class="stack" style="margin-top:12px"></div></div>
+      </div>
+    </section>
+
+    <section id="leaders" class="section"><div class="glass card"><h3 class="title">Global Leaderboard</h3><div style="overflow:auto"><table class="table"><thead><tr><th>#</th><th>Trainer</th><th>Level</th><th>Collection</th><th>Shinies</th><th>Badges</th><th>Elite Wins</th><th>Tower</th></tr></thead><tbody id="leaderRows"></tbody></table></div></div></section>
+  </div>
+</div>
+<div id="notice" class="notice hidden"></div>
+<script>
+const API='/api'; let token=localStorage.getItem('novaToken')||''; let me=null; let quests=[];
+const regions=['Kanto','Johto','Hoenn','Sinnoh','Unova','Kalos','Alola','Galar','Paldea'];
+for(const id of ['gymRegion','advRegion']) document.getElementById(id).innerHTML=regions.map(r=>`<option>${r}</option>`).join('');
+function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+async function api(url,opt={}){opt.headers={...(opt.headers||{}),'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})};let r=await fetch(API+url,opt);let j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Request failed');return j}
+function toast(msg,bad=false){let n=document.getElementById('notice');n.textContent=msg;n.classList.remove('hidden');n.style.borderColor=bad?'#ff5d73':'#2a3150';clearTimeout(window.nt);window.nt=setTimeout(()=>n.classList.add('hidden'),3200)}
+async function register(){try{let j=await api('/auth/register',{method:'POST',body:JSON.stringify({username:username.value,password:password.value})});setSession(j)}catch(e){authmsg.textContent=e.message}}
+async function login(){try{let j=await api('/auth/login',{method:'POST',body:JSON.stringify({username:username.value,password:password.value})});setSession(j)}catch(e){authmsg.textContent=e.message}}
+function setSession(j){token=j.token;localStorage.setItem('novaToken',token);boot()}
+async function logout(){try{await api('/auth/logout',{method:'POST'})}catch{}localStorage.removeItem('novaToken');token='';me=null;game.classList.add('hidden');auth.classList.remove('hidden')}
+async function boot(){if(!token)return;try{await refresh();auth.classList.add('hidden');game.classList.remove('hidden');loadFriends();loadTrades();loadLeaderboard()}catch{localStorage.removeItem('novaToken');token=''}}
+async function refresh(){let j=await api('/me');me=j.user;quests=j.quests;renderAll()}
+function renderAll(){who.textContent=me.username;lvl.textContent=me.level;coins.textContent=me.coins.toLocaleString();count.textContent=me.collection.length;shinyCount.textContent=me.collection.filter(p=>p.shiny).length;renderQuests();renderCollection();renderTeam();career.innerHTML=`<div>Badges: <b>${me.badges.length}</b></div><div>Elite Four wins: <b>${me.eliteWins}</b></div><div>Battle Tower best: <b>Floor ${me.towerBest}</b></div><div>Total spins: <b>${me.spins}</b></div><div>Raid Passes: <b>${me.inventory?.raidPass||0}</b></div>`}
+function sprite(p){return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.shiny?'shiny/':''}${p.speciesId}.png`}
+function monCard(p,clickable=true){let inTeam=me.team.includes(p.id);return `<div class="mon" ${clickable?`onclick="toggleTeam('${p.id}')"`:''}>${inTeam?'<span class="teamflag">TEAM</span>':''}<img loading="lazy" src="${sprite(p)}"><div class="name">${p.shiny?'✨ ':''}${esc(p.name)}</div><div class="meta">Lv ${p.level} • Power ${p.power||'?'} • #${p.speciesId}</div><span class="tag ${p.shiny?'shiny':''}">${esc(p.rarity)}</span>${clickable?`<div style="height:8px"></div><button class="btn mini" onclick="event.stopPropagation();train('${p.id}')">Train 🪙${50*p.level}</button><div class="mini muted" style="margin-top:5px">ID: ${p.id}</div>`:''}</div>`}
+function renderCollection(){if(!me)return;let q=(collectionSearch.value||'').toLowerCase();let arr=[...me.collection].filter(p=>p.name.toLowerCase().includes(q)).sort((a,b)=>Number(b.shiny)-Number(a.shiny)||b.level-a.level);collectionGrid.innerHTML=arr.length?arr.map(p=>monCard(p)).join(''):'<div class="muted">No Pokémon yet. Spin the roulette!</div>'}
+function renderTeam(){let mons=me.team.map(id=>me.collection.find(p=>p.id===id)).filter(Boolean);teamPreview.innerHTML=mons.length?mons.map(p=>monCard(p,false)).join(''):'<div class="muted">Your first catches are added automatically.</div>'}
+async function toggleTeam(id){let team=[...me.team];if(team.includes(id))team=team.filter(x=>x!==id);else if(team.length<6)team.push(id);else return toast('Your team already has 6 Pokémon.',true);try{await api('/team',{method:'POST',body:JSON.stringify({ids:team})});me.team=team;renderAll()}catch(e){toast(e.message,true)}}
+async function train(id){try{let j=await api(`/pokemon/${id}/train`,{method:'POST'});toast(`${j.pokemon.name} reached level ${j.pokemon.level}!`);await refresh()}catch(e){toast(e.message,true)}}
+async function spin(){spinBtn.disabled=true;spinName.textContent='Spinning…';spinImg.style.transform='scale(.85) rotate(8deg)';try{await new Promise(r=>setTimeout(r,650));let j=await api('/spin',{method:'POST'});spinImg.src=j.pokemon.sprite;spinImg.className='bigmon'+(j.pokemon.shiny?' sparkle':'');spinImg.style.transform='';spinName.textContent=(j.pokemon.shiny?'✨ SHINY ':'')+j.pokemon.name;spinMeta.textContent=`${j.pokemon.rarity} • Lv ${j.pokemon.level} • Power ${j.pokemon.power}${j.starter?' • FREE STARTER SPIN':''}`;me=j.user;toast(j.pokemon.shiny?'SHINY PULL! ✨':'Pokémon added to your collection.');await refresh()}catch(e){toast(e.message,true)}finally{spinBtn.disabled=false}}
+function renderQuests(){questsEl=quests;document.getElementById('quests').innerHTML=questsEl.map(q=>`<div class="quest"><div class="row" style="justify-content:space-between"><b>${esc(q.label)}</b><span class="muted">${q.progress}/${q.goal}</span></div><div class="progress" style="margin:8px 0"><i style="width:${q.progress/q.goal*100}%"></i></div><button class="btn mini" ${q.progress<q.goal?'disabled':''} onclick="claim('${q.id}')">Claim 🪙${q.reward}</button></div>`).join('')}
+async function claim(id){try{let j=await api(`/quests/${id}/claim`,{method:'POST'});toast(`Quest claimed: +${j.reward} coins`);await refresh()}catch(e){toast(e.message,true)}}
+function fmtBattle(j){let r=j.result;return `${r.win?'VICTORY ✅':'DEFEAT ❌'}\nYour power: ${r.playerPower}\nEnemy power: ${r.enemyPower}\nWin chance: ${Math.round(r.chance*100)}%\nRewards: +${r.coins} coins, +${r.xp} XP`}
+async function gym(){fight(async()=>await api('/battle/gym',{method:'POST',body:JSON.stringify({region:gymRegion.value})}))}
+async function elite(){fight(async()=>await api('/battle/elite',{method:'POST'}))}
+async function tower(){fight(async()=>await api('/battle/tower',{method:'POST'}))}
+async function raid(){fight(async()=>await api('/raid',{method:'POST'}),true)}
+async function fight(fn,raidMode=false){battleResult.textContent='Battle in progress…';try{let j=await fn();battleResult.textContent=fmtBattle(j)+(j.badge?`\nBadge earned: ${j.badge.name}`:'')+(j.captured?`\nCAPTURED: ${j.captured.name}${j.captured.shiny?' ✨':''}`:'');toast(j.result.win?'You won!':'You lost the battle.');await refresh()}catch(e){battleResult.textContent=e.message;toast(e.message,true)}}
+async function expedition(){advResult.textContent='Exploring…';try{let j=await api('/expedition',{method:'POST',body:JSON.stringify({region:advRegion.value})});advResult.innerHTML=`<b>${j.caught?'Caught!':'It escaped!'}</b><br>${j.pokemon.shiny?'✨ ':''}${esc(j.pokemon.name)} • ${esc(j.pokemon.rarity)} • Lv ${j.pokemon.level}<br>Found ${j.coins} coins.<br><img src="${j.pokemon.sprite}" style="width:150px;height:150px;object-fit:contain">`;await refresh()}catch(e){advResult.textContent=e.message}}
+async function searchFriends(){try{let a=await api('/friends/search?q='+encodeURIComponent(friendQ.value));friendSearch.innerHTML=a.map(x=>`<div class="row" style="justify-content:space-between"><span><b>${esc(x.username)}</b> <span class="muted">Lv ${x.level}</span></span>${x.isFriend?'<span class="goodtext">Friend</span>':`<button class="btn" onclick="friendReq('${esc(x.username)}')">Add</button>`}</div>`).join('')||'<div class="muted">No trainers found.</div>'}catch(e){toast(e.message,true)}}
+async function friendReq(u){try{await api('/friends/request/'+encodeURIComponent(u),{method:'POST'});toast('Friend request sent.');searchFriends()}catch(e){toast(e.message,true)}}
+async function acceptFriend(u){try{await api('/friends/accept/'+encodeURIComponent(u),{method:'POST'});toast('Friend added.');loadFriends()}catch(e){toast(e.message,true)}}
+async function pvp(u){battleResult.textContent='PvP battle…';tab('battle',document.querySelector('[data-tab="battle"]'));try{let j=await api('/battle/pvp/'+encodeURIComponent(u),{method:'POST'});battleResult.textContent=`PvP vs ${u}\n`+fmtBattle(j);await refresh()}catch(e){battleResult.textContent=e.message}}
+async function loadFriends(){if(!token)return;try{let j=await api('/friends');friends.innerHTML=`<b>Requests</b>${j.requests.map(x=>`<div class="row" style="justify-content:space-between"><span>${esc(x.username)}</span><button class="btn good" onclick="acceptFriend('${esc(x.username)}')">Accept</button></div>`).join('')||'<div class="muted mini">None</div>'}<b style="margin-top:10px">Friends</b>${j.friends.map(x=>`<div class="row" style="justify-content:space-between"><span>${esc(x.username)} • Lv ${x.level}</span><button class="btn" onclick="pvp('${esc(x.username)}')">PvP</button></div>`).join('')||'<div class="muted mini">None yet</div>'}`}catch{}}
+async function makeTrade(){try{await api('/trades',{method:'POST',body:JSON.stringify({username:tradeUser.value,myPokemonId:tradeMine.value,wantedPokemonId:tradeWant.value||null})});toast('Trade offer created.');loadTrades()}catch(e){toast(e.message,true)}}
+async function loadTrades(){if(!token)return;try{let a=await api('/trades');trades.innerHTML=a.map(t=>`<div class="result">Trade ${t.id.slice(0,8)} • ${t.status}<br><span class="mini">From: ${t.from===me.id?'you':t.from.slice(0,8)} • Pokémon ${t.myPokemonId}</span>${t.to===me.id&&t.status==='open'?`<div class="row" style="margin-top:8px"><input id="swap${t.id}" class="field" placeholder="Your Pokémon ID to send"><button class="btn good" onclick="acceptTrade('${t.id}')">Accept</button></div>`:''}</div>`).join('')||'<div class="muted">No trades.</div>'}catch{}}
+async function acceptTrade(id){try{let v=document.getElementById('swap'+id).value;await api('/trades/'+id+'/accept',{method:'POST',body:JSON.stringify({myPokemonId:v})});toast('Trade completed!');await refresh();loadTrades()}catch(e){toast(e.message,true)}}
+async function loadLeaderboard(){try{let a=await api('/leaderboard');leaderRows.innerHTML=a.map((x,i)=>`<tr><td>${i+1}</td><td><b>${esc(x.username)}</b></td><td>${x.level}</td><td>${x.collection}</td><td>${x.shinies}</td><td>${x.badges}</td><td>${x.eliteWins}</td><td>${x.towerBest}</td></tr>`).join('')}catch{}}
+function tab(id,btn){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');if(id==='social'){loadFriends();loadTrades()}if(id==='leaders')loadLeaderboard()}
+boot();
+</script>
+</body></html>
